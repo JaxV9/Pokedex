@@ -23,12 +23,21 @@
 	  pokemonList = await response.json();
 	  await fetchPokemonDetails();
 	});
-
+	let pokemonName = '';
+	  
+     // Fonction pour gérer le form normalement
+     function handleSubmit(event) {
+      event.preventDefault();
+      if (pokemonName.trim() !== '') {
+        // ouvre la page du Pokémon
+        window.location.href = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
+      }
+	  }
 </script>
   
 
 <svelte:head>
-	<title>Home</title>
+	<title>Find your pokemon</title>
 	<meta name="description" content="Svelte demo app" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +65,21 @@
 	{:else}
 	<p>Chargement...</p>
 	{/if}
+		Find your pokemon
+	</h1>
 </section>
+	  
+	 
+	  
+	  <!-- bouton pour chercher -->
+		<input
+		  type="text"
+		  placeholder="Rechercher un Pokémon dans le pkedex..."
+		  bind:value={pokemonName}
+		  required
+		/>
+		<a href="/details/{pokemonName}">go to Pokedex</a> 
+
 
 <style>
 	@import "style.css";
@@ -97,4 +120,10 @@
 		color: #333333;
 	}
 	
-</style>
+  /* Ajoute ke style apres*/
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+ </style>
