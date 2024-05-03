@@ -36,3 +36,5 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+Alex : Je voulais faire du Svelte parce que Nuxt ne marchait pas quand on était en cours, du coup j'ai plus de connaissance en Svelte que en Nuxt
