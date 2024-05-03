@@ -36,6 +36,10 @@
                     <div class="label">Types : </div>
                     <div class="value">{pokemonData.types[0].type.name}</div>
                 </div>
+                <div class="statsContainer">
+                    <div class="label">Types : </div>
+                    <div class="value">{pokemonData.types[0].type.name}</div>
+                </div>
             </div>
         </div>
     </div>
