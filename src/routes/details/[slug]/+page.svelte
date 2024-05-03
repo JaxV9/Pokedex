@@ -37,8 +37,16 @@
                     <div class="value">{pokemonData.types[0].type.name}</div>
                 </div>
                 <div class="statsContainer">
-                    <div class="label">Types : </div>
-                    <div class="value">{pokemonData.types[0].type.name}</div>
+                    <div class="label">Attaques : </div>
+                    <div class="value">
+                        <ul>
+                            <li>{pokemonData.moves[0]?.move.name}</li>
+                            <li>{pokemonData.moves[1]?.move.name}</li>
+                            <li>{pokemonData.moves[2]?.move.name}</li>
+                            <li>{pokemonData.moves[3]?.move.name}</li>
+                        </ul>
+                    </div>
+                    
                 </div>
             </div>
         </div>
