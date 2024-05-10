@@ -69,7 +69,7 @@
   
 
 <svelte:head>
-	<title>Find your pokemon</title>
+	<title>Pokédex</title>
 	<meta name="description" content="Svelte demo app" />
 
 </svelte:head>
@@ -81,7 +81,7 @@
 
 	<section class="section">
 		<h1>
-			Liste Pokémons
+			Pokemons list
 		</h1>
 		<p class="informations">{currentNbPokemon} pokémons sur {countPokemons}</p>
 		<PokemonList PokemonListProps={pokemonList} PokemonDetailsProps={pokemonDetails}/>
