@@ -2,6 +2,8 @@
 
 	import { onMount } from 'svelte';
 	import type { PokemonType, PokemonListType } from '../model/Pokemon'
+	import Button from '$lib/components/ui/button.svelte';
+	import PokemonList from '$lib/components/pokemonList.svelte';
   
 	let pokemonList: PokemonListType;
 	let pokemonDetails: PokemonType[]  = [];
@@ -65,7 +67,7 @@
 	</h1>
 	  <input
 	  type="text"
-	  placeholder="Rechercher un Pokémon dans le pkedex..."
+	  placeholder="Rechercher un Pokémon dans le pokedex..."
 	  bind:value={pokemonName}
 	  required
 	/>
@@ -76,23 +78,10 @@
 	<h1>
 		Liste Pokémons
 	</h1>
+	<PokemonList PokemonListProps={pokemonList} PokemonDetailsProps={pokemonDetails}/>
 	{#if pokemonList && pokemonDetails.length > 0}
-		<div id="pokemonContainerList">
-			{#each pokemonList.results as pokemon, index}
-				<a class="linkPokemon" href="details/{pokemon.name}">
-					<div class="pokemonContainer" >
-						<img src={String(pokemonDetails[index])} alt={pokemon.name} />
-						<h3>{pokemon.name}<h3>
-					</div>
-				</a>
-			{/each}
-		</div>
-		<button on:click={loadMorePokemon}>Charger plus de pokémons</button>
-	{:else}
-	<p>Chargement...</p>
+		<Button textProps="Charger plus de pokémons" fonctionProps={loadMorePokemon}/>
 	{/if}
-
-
 
 </section>
 	  
@@ -101,38 +90,6 @@
 <style>
 
 	h1{
-		color: #333333;
-	}
-
-	#pokemonContainerList {
-		display: flex;
-		flex-wrap: wrap;
-		width: 100%;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.pokemonContainer{
-		display: flex;
-		width: 100px;
-		height: 125px;
-		flex-direction: column;
-		align-items: center;
-		margin: 10px;
-		padding: 20px;
-		border-radius: 10px;
-		background-color: #d3d1d1;
-	}
-	#titre {
-		display: flex;
-		justify-content: center;
-		height: 30px;
-		margin: 30px 0;
-		color: white;
-	}
-
-	.linkPokemon {
-		text-decoration: none;
 		color: #333333;
 	}
 	
