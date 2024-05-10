@@ -10,7 +10,7 @@
             <a class="linkPokemon" href="details/{pokemon.name}">
                 <div class="pokemonContainer" >
                     <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+[index+1]+".png"} alt=""/>
-                    <h3>{pokemon.name} {index+1}<h3>
+                    <h3>{pokemon.name}</h3>
                 </div>
             </a>
         {/each}

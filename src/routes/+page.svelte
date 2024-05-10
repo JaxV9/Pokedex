@@ -11,8 +11,9 @@
 	let currentOffset: number = 0
 	let currentLimit: number = 20
 
-	const fetchPokemonList = async(offset: number, limit: number) => {
-		const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset='+offset.toString()+'&limit='+limit.toString())
+	const fetchPokemonList = async(offset: number) => {
+		const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset='+offset.toString()+'&limit='+currentLimit.toString())
+		console.log("This fetch : " + 'https://pokeapi.co/api/v2/pokemon?offset='+offset.toString()+'&limit='+currentLimit.toString())
 		if(offset === 0){
 			pokemonList = await response.json();
 		}
@@ -24,34 +25,23 @@
 	}
 
 	const loadMorePokemon = async () => {
-		currentOffset = currentOffset+20
-		currentLimit = currentLimit+20
-		fetchPokemonList(currentOffset, currentLimit)
-		fetchPokemonDetails()
+		currentOffset += currentLimit
+		fetchPokemonList(currentOffset)
 	}
   
 	async function fetchPokemonDetails() {
 		let theLastsPokemons = pokemonList.results.slice(- currentLimit)
 		for (const pokemon of theLastsPokemons) {
-			// console.log("Name : "+ pokemon.name)
-			// console.log("URL : "+pokemon.url)
 			const response = await fetch(pokemon.url);
 			const details = await response.json();
 			const sprites = details.sprites.front_default;
-			//console.log("Response : "+sprites)
 			pokemonDetails = [...pokemonDetails, sprites];
-			//console.log("Pokemon details : "+pokemonDetails)
 		}
-	}
-
-	const test = async () => {
 		console.log(pokemonList)
-
-		//console.log(pokemonDetails[0])
 	}
   
 	onMount(async () => {
-		fetchPokemonList(currentOffset, currentLimit)
+		fetchPokemonList(currentOffset)
 	});
 	let pokemonName = '';
 
@@ -61,6 +51,12 @@
         window.location.href = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
       }
 	  }
+
+	  const test = () => {
+		console.log(pokemonDetails)
+	  }
+
+
 </script>
   
 
@@ -71,7 +67,7 @@
 </svelte:head>
 
 <section>
-	<button on:click={test}>Test</button>
+	<button on:click={test}>test</button>
 	<h1>
 		Find your pokemon
 	</h1>
