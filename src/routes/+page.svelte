@@ -1,9 +1,10 @@
-<script script="ts">
+<script lang="ts">
 
 	import { onMount } from 'svelte';
+	import type { PokemonType, PokemonListType } from '../model/Pokemon'
   
-	let pokemonList;
-	let pokemonDetails = [];
+	let pokemonList: PokemonListType;
+	let pokemonDetails: PokemonType[]  = [];
   
 	async function fetchPokemonDetails() {
 	  for (const pokemon of pokemonList.results) {
@@ -11,10 +12,7 @@
 		const details = await response.json();
 		const sprites = details.sprites.front_default;	
 		const id = details.id;
-		// console.log(id)
-		// console.log(pokemonList)
 		pokemonDetails = [...pokemonDetails, sprites];
-		// console.log(id)
 	  }
 	}
   
@@ -26,7 +24,7 @@
 	let pokemonName = '';
 	  
      // Fonction pour gérer le form normalement
-     function handleSubmit(event) {
+     function handleSubmit(event: any) {
       event.preventDefault();
       if (pokemonName.trim() !== '') {
         // ouvre la page du Pokémon
@@ -40,7 +38,7 @@
 	<title>Find your pokemon</title>
 	<meta name="description" content="Svelte demo app" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </svelte:head>
 
@@ -54,9 +52,9 @@
 	{#if pokemonList && pokemonDetails.length > 0}
 		<div id="pokemonContainerList">
 			{#each pokemonList.results as pokemon, index}
-				<a class="linkPokemon" href="/{pokemon.name}">
+				<a class="linkPokemon" href="details/{pokemon.name}">
 					<div class="pokemonContainer" >
-						<img src={pokemonDetails[index]} alt={pokemon.name} />
+						<img src={String(pokemonDetails[index])} alt={pokemon.name} />
 						<h3>{pokemon.name}<h3>
 					</div>
 				</a>
@@ -121,7 +119,7 @@
 		color: #333333;
 	}
 	
-  /* Ajoute ke style apres*/
+  /* Ajoute le style apres*/
   .search-bar {
     display: flex;
     align-items: center;
