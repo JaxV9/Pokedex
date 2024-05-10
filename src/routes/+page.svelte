@@ -5,6 +5,30 @@
   
 	let pokemonList: PokemonListType;
 	let pokemonDetails: PokemonType[]  = [];
+
+	let currentOffset: number = 0
+	let currentLimit: number = 20
+
+	const fetchPokemonList = async(offset: number, limit: number) => {
+		const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset='+offset.toString()+'&limit='+limit.toString())
+		if(offset === 0){
+			pokemonList = await response.json();
+		}
+		if(offset > 0){
+			const data = await response.json();
+			pokemonList.results = [...pokemonList.results, ...data.results];
+		}
+		await fetchPokemonDetails();
+	}
+
+	const loadMorePokemon = async () => {
+		currentOffset = currentOffset+20
+		currentLimit = currentLimit+20
+		fetchPokemonList(currentOffset, currentLimit) // Ajouter les nouveaux Pokémon à la liste existante
+
+		// Charger les détails pour chaque nouveau Pokémon
+		fetchPokemonDetails()
+	}
   
 	async function fetchPokemonDetails() {
 	  for (const pokemon of pokemonList.results) {
@@ -15,11 +39,10 @@
 		pokemonDetails = [...pokemonDetails, sprites];
 	  }
 	}
+
   
 	onMount(async () => {
-	  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
-	  pokemonList = await response.json();
-	  await fetchPokemonDetails();
+		fetchPokemonList(currentOffset, currentLimit)
 	});
 	let pokemonName = '';
 	  
@@ -37,18 +60,26 @@
 <svelte:head>
 	<title>Find your pokemon</title>
 	<meta name="description" content="Svelte demo app" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
 </svelte:head>
 
-<section id="titre">
+<section>
 	<h1>
-		Liste Pokemon
+		Find your pokemon
 	</h1>
+	  <input
+	  type="text"
+	  placeholder="Rechercher un Pokémon dans le pkedex..."
+	  bind:value={pokemonName}
+	  required
+	/>
+	<a href="/details/{pokemonName}">go to Pokedex</a> 
 </section>
 
 <section id="pokemonList">
+	<h1>
+		Liste Pokémons
+	</h1>
 	{#if pokemonList && pokemonDetails.length > 0}
 		<div id="pokemonContainerList">
 			{#each pokemonList.results as pokemon, index}
@@ -60,28 +91,18 @@
 				</a>
 			{/each}
 		</div>
+		<button on:click={loadMorePokemon}>Charger plus de pokémons</button>
 	{:else}
 	<p>Chargement...</p>
 	{/if}
-	<h1>
-		Find your pokemon
-	</h1>
+
+
+
 </section>
 	  
 	 
-	  
-	  <!-- bouton pour chercher -->
-		<input
-		  type="text"
-		  placeholder="Rechercher un Pokémon dans le pkedex..."
-		  bind:value={pokemonName}
-		  required
-		/>
-		<a href="/details/{pokemonName}">go to Pokedex</a> 
-
 
 <style>
-	@import "style.css";
 
 	h1{
 		color: #333333;
@@ -89,10 +110,10 @@
 
 	#pokemonContainerList {
 		display: flex;
-		justify-content: space-between;
-		height: calc(100vh - 100px);
-		overflow: auto;
 		flex-wrap: wrap;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.pokemonContainer{
@@ -120,9 +141,9 @@
 	}
 	
   /* Ajoute le style apres*/
-  .search-bar {
+  /* .search-bar {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
+  } */
  </style>
