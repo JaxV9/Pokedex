@@ -24,9 +24,7 @@
 	const loadMorePokemon = async () => {
 		currentOffset = currentOffset+20
 		currentLimit = currentLimit+20
-		fetchPokemonList(currentOffset, currentLimit) // Ajouter les nouveaux Pokémon à la liste existante
-
-		// Charger les détails pour chaque nouveau Pokémon
+		fetchPokemonList(currentOffset, currentLimit)
 		fetchPokemonDetails()
 	}
   
@@ -45,12 +43,10 @@
 		fetchPokemonList(currentOffset, currentLimit)
 	});
 	let pokemonName = '';
-	  
-     // Fonction pour gérer le form normalement
+
      function handleSubmit(event: any) {
       event.preventDefault();
       if (pokemonName.trim() !== '') {
-        // ouvre la page du Pokémon
         window.location.href = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
       }
 	  }
