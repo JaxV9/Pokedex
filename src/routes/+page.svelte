@@ -65,6 +65,7 @@
 	{:else}
 	<p>Chargement...</p>
 	{/if}
+	<h1>
 		Find your pokemon
 	</h1>
 </section>
