@@ -3,6 +3,7 @@
     /** @type {import('./$types').PageData} */
     /** @type {import('./$types').PageLoad} */
     import { page } from '$app/stores';
+    import '../../style.css';
     let pokemonData: any = null;
     
     const fetchData = async () => {

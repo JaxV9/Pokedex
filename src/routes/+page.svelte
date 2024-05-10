@@ -2,18 +2,20 @@
 
 	import { onMount } from 'svelte';
 	import type { PokemonType, PokemonListType } from '../model/Pokemon'
-	import Button from '$lib/components/ui/button.svelte';
+	import Button from '$lib/components/ui/buttons/button.svelte';
 	import PokemonList from '$lib/components/pokemonList.svelte';
+	import './style.css';
+	import SearchBar from '$lib/components/ui/searchBar/searchBar.svelte';
   
 	let pokemonList: PokemonListType;
 	let pokemonDetails: PokemonType[]  = [];
 
 	let currentOffset: number = 0
 	let currentLimit: number = 20
+	let currentPage: number = 1
 
 	const fetchPokemonList = async(offset: number) => {
 		const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset='+offset.toString()+'&limit='+currentLimit.toString())
-		console.log("This fetch : " + 'https://pokeapi.co/api/v2/pokemon?offset='+offset.toString()+'&limit='+currentLimit.toString())
 		if(offset === 0){
 			pokemonList = await response.json();
 		}
@@ -26,6 +28,7 @@
 
 	const loadMorePokemon = async () => {
 		currentOffset += currentLimit
+		currentPage += 1
 		fetchPokemonList(currentOffset)
 	}
   
@@ -37,7 +40,6 @@
 			const sprites = details.sprites.front_default;
 			pokemonDetails = [...pokemonDetails, sprites];
 		}
-		console.log(pokemonList)
 	}
   
 	onMount(async () => {
@@ -52,11 +54,6 @@
       }
 	  }
 
-	  const test = () => {
-		console.log(pokemonDetails)
-	  }
-
-
 </script>
   
 
@@ -66,25 +63,17 @@
 
 </svelte:head>
 
-<section>
-	<button on:click={test}>test</button>
-	<h1>
-		Find your pokemon
-	</h1>
-	  <input
-	  type="text"
-	  placeholder="Rechercher un Pokémon dans le pokedex..."
-	  bind:value={pokemonName}
-	  required
-	/>
-	<a href="/details/{pokemonName}">go to Pokedex</a> 
+<section class="section">
+	<h1>Find your pokemon</h1>
+	<SearchBar />
 </section>
 
-<section id="pokemonList">
+<section class="section">
 	<h1>
 		Liste Pokémons
 	</h1>
 	<PokemonList PokemonListProps={pokemonList} PokemonDetailsProps={pokemonDetails}/>
+	<p class="informations">Page {currentPage}</p>
 	{#if pokemonList && pokemonDetails.length > 0}
 		<Button textProps="Charger plus de pokémons" fonctionProps={loadMorePokemon}/>
 	{/if}
@@ -95,14 +84,5 @@
 
 <style>
 
-	h1{
-		color: #333333;
-	}
-	
-  /* Ajoute le style apres*/
-  /* .search-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  } */
+
  </style>

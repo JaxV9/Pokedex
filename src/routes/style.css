@@ -4,11 +4,33 @@
 }
 
 html {
-    background-color: #404040 !important;
+    background-color: #251F1E !important;
     font-family: "Roboto" !important;
 }
 
 body{
     margin: 0px !important;
-    background-color: #251F1E;
+    height: 100vh;
+}
+
+h1 {
+    color: #FFFFFF;
+    margin-bottom: 28px;
+}
+
+p, ul, span, .label, .value {
+    color: #FFFFFF;
+}
+
+.informations {
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.section {
+    margin-top: 50px;
+    padding-bottom: 50px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -23,25 +23,30 @@
     
 <style>
 	#pokemonContainerList {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		column-gap: 16px;
+		row-gap: 16px;
 		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
-        margin-bottom: 50px;
+        margin-bottom: 28px;
 	}
 
 	.pokemonContainer{
 		display: flex;
-		width: 100px;
-		height: 125px;
+		width: fit-content;
+		height: fit-content;
 		flex-direction: column;
 		align-items: center;
-		margin: 10px;
-		padding: 20px;
 		border-radius: 10px;
 		background-color: #d3d1d1;
 	}
+
+	.pokemonContainer > img {
+		width: 150px;
+	}
+
 	#titre {
 		display: flex;
 		justify-content: center;
