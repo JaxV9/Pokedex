@@ -1,10 +1,11 @@
 <script lang="ts">
-    export let textProps;
-    export let fonctionProps;
+    export let textProps = '';
+    export let fonctionProps = () => {};
+    export let widthProps = 'fit-content'
         
 </script>
         
-<button class="thisBtn" on:click={fonctionProps}>{textProps}</button>
+<button class="thisBtn" on:click={fonctionProps} style="width: {widthProps}">{textProps}</button>
 
     
 <style>

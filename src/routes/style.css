@@ -22,6 +22,11 @@ p, ul, span, .label, .value {
     color: #FFFFFF;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .informations {
     color: #FFFFFF;
     font-size: 16px;
