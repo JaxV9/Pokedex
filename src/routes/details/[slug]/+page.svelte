@@ -3,6 +3,7 @@
     /** @type {import('./$types').PageData} */
     /** @type {import('./$types').PageLoad} */
     import { page } from '$app/stores';
+	import Layout from '../../../layout/Layout.svelte';
     import '../../style.css';
     let pokemonData: any = null;
     
@@ -23,38 +24,43 @@
         console.log(pokemonData.types[0].type.name)
     }
 </script>
-
-    {#if pokemonData !== null}
-    <div class="pokemonDatasContainer">
-        <div class="pokemonPictureContainer">
-            <h1>{pokemonData.name}</h1>
-            <img src={pokemonData.sprites.front_shiny} alt={pokemonData.name} class="pokemonPicture"/>
-        </div>
-        <div class="pokemonStatsContainer">
-            <div class="stats">
-                <span class="numberStats">Number : {pokemonData.order}</span>
-                <div class="statsContainer">
-                    <div class="label">Types : </div>
-                    <div class="value">{pokemonData.types[0].type.name}</div>
-                </div>
-                <div class="statsContainer">
-                    <div class="label">Attaques : </div>
-                    <div class="value">
-                        <ul>
-                            <li>{pokemonData.moves[0]?.move.name}</li>
-                            <li>{pokemonData.moves[1]?.move.name}</li>
-                            <li>{pokemonData.moves[2]?.move.name}</li>
-                            <li>{pokemonData.moves[3]?.move.name}</li>
-                        </ul>
+    <Layout>
+        {#if pokemonData !== null}
+        <section class="section">
+        <div class="pokemonDatasContainer">
+            <div class="pokemonPictureContainer">
+                <h1>{pokemonData.name}</h1>
+                <img src={pokemonData.sprites.front_default} alt={pokemonData.name} class="pokemonPicture"/>
+            </div>
+            <div class="pokemonStatsContainer">
+                <div class="stats">
+                    <span class="numberStats">Number : {pokemonData.order}</span>
+                    <div class="statsContainer">
+                        <div class="label">Types : </div>
+                        <div class="value">{pokemonData.types[0].type.name}</div>
                     </div>
-                    
+                    <div class="statsContainer">
+                        <div class="label">Attaques : </div>
+                        <div class="value">
+                            <ul>
+                                <li>{pokemonData.moves[0]?.move.name}</li>
+                                <li>{pokemonData.moves[1]?.move.name}</li>
+                                <li>{pokemonData.moves[2]?.move.name}</li>
+                                <li>{pokemonData.moves[3]?.move.name}</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    {:else}
-        <p>Loading...</p>
-    {/if}
+    </section>
+
+        {:else}
+            <p>Loading...</p>
+        {/if}
+    </Layout>
+
 
 <style>
 

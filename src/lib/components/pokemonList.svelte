@@ -11,6 +11,7 @@
                 <div class="pokemonContainer" >
                     <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+[index+1]+".png"} alt=""/>
                     <h3>{pokemon.name}</h3>
+					<p class="pokemonDetails"> N°{index+1}</p>
                 </div>
             </a>
         {/each}
@@ -19,8 +20,6 @@
     <p>Chargement...</p>
     {/if}
 
-    
-    
 <style>
 	#pokemonContainerList {
 		display: grid;
@@ -33,29 +32,34 @@
         margin-bottom: 28px;
 	}
 
+	.pokemonDetails {
+		font-size: 14px;
+		color: #333333;
+	}
+
 	.pokemonContainer{
 		display: flex;
-		width: fit-content;
+		width: 100%;
 		height: fit-content;
 		flex-direction: column;
 		align-items: center;
 		border-radius: 10px;
 		background-color: #d3d1d1;
+		transition: all ease 0.2s;
+	}
+
+	.pokemonContainer:hover {
+		scale: 1.1;
+		transition: all ease 0.2s;
+		background-color: #bababa;
 	}
 
 	.pokemonContainer > img {
 		width: 150px;
 	}
 
-	#titre {
-		display: flex;
-		justify-content: center;
-		height: 30px;
-		margin: 30px 0;
-		color: white;
-	}
-
 	.linkPokemon {
+		width: fit-content;
 		text-decoration: none;
 		color: #333333;
 	}
