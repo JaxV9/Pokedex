@@ -9,8 +9,8 @@
         {#each PokemonListProps.results as pokemon, index}
             <a class="linkPokemon" href="details/{pokemon.name}">
                 <div class="pokemonContainer" >
-                    <img src={String(PokemonDetailsProps[index])} alt={pokemon.name} />
-                    <h3>{pokemon.name}<h3>
+                    <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+[index+1]+".png"} alt=""/>
+                    <h3>{pokemon.name} {index+1}<h3>
                 </div>
             </a>
         {/each}
@@ -28,6 +28,7 @@
 		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
+        margin-bottom: 50px;
 	}
 
 	.pokemonContainer{

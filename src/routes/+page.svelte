@@ -31,15 +31,24 @@
 	}
   
 	async function fetchPokemonDetails() {
-	  for (const pokemon of pokemonList.results) {
-		const response = await fetch(pokemon.url);
-		const details = await response.json();
-		const sprites = details.sprites.front_default;	
-		const id = details.id;
-		pokemonDetails = [...pokemonDetails, sprites];
-	  }
+		let theLastsPokemons = pokemonList.results.slice(- currentLimit)
+		for (const pokemon of theLastsPokemons) {
+			// console.log("Name : "+ pokemon.name)
+			// console.log("URL : "+pokemon.url)
+			const response = await fetch(pokemon.url);
+			const details = await response.json();
+			const sprites = details.sprites.front_default;
+			//console.log("Response : "+sprites)
+			pokemonDetails = [...pokemonDetails, sprites];
+			//console.log("Pokemon details : "+pokemonDetails)
+		}
 	}
 
+	const test = async () => {
+		console.log(pokemonList)
+
+		//console.log(pokemonDetails[0])
+	}
   
 	onMount(async () => {
 		fetchPokemonList(currentOffset, currentLimit)
@@ -62,6 +71,7 @@
 </svelte:head>
 
 <section>
+	<button on:click={test}>Test</button>
 	<h1>
 		Find your pokemon
 	</h1>
