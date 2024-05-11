@@ -27,30 +27,31 @@
     <Layout>
         {#if pokemonData !== null}
         <section class="pokemonSection">
+            <h1>{pokemonData.name}</h1>
         <div class="pokemonDatasContainer">
             <div class="pokemonPictureContainer">
-                <h1>{pokemonData.name}</h1>
+                
                 <img class="pokemonPicture" src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+pokemonData.id+".png"} alt={pokemonData.name}/>
             </div>
             <div class="pokemonStatsContainer">
                 <div class="stats">
-                    <p>Taille :</p>
-                    <p>{pokemonData.height/10} m</p>
+                    <span class="pokemonStatsTitle">Taille :</span>
+                    <span class="pokemonStatsValue">{pokemonData.height/10} m</span>
                 </div>
                 <div class="stats">
-                    <p>Poids :</p>
-                    <p>{pokemonData.weight/10} kg</p>
+                    <span class="pokemonStatsTitle">Poids :</span>
+                    <span class="pokemonStatsValue">{pokemonData.weight/10} kg</span>
                 </div>
                 <div class="stats">
-                    <p>Types :</p>
+                    <span class="pokemonStatsTitle">Types :</span>
                     {#each pokemonData.types as types}
-                        <p>{types.type.name}</p>
+                        <span class="pokemonStatsValue">{types.type.name}</span>
                     {/each}
                 </div>
                 <div class="stats">
-                    <p>Abilities :</p>
+                    <span class="pokemonStatsTitle">Abilities :</span>
                     {#each pokemonData.abilities as abilities}
-                        <p>{abilities.ability.name}</p>
+                        <span class="pokemonStatsValue">{abilities.ability.name}</span>
                     {/each}
                 </div>
             </div>
@@ -73,6 +74,15 @@
         margin-right: auto;
     }
 
+    .pokemonSection > h1 {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 28px;
+        text-transform: capitalize;
+        font-size: 35px;
+
+    }
+
     .pokemonDatasContainer {
     }
 
@@ -82,58 +92,57 @@
 
     }
 
-    .pokemonPictureContainer > h1 {
-        text-align: center;
-        margin-bottom: 0;
-        text-transform: capitalize;
-        font-size: 28px;
-    }
-
     .pokemonPicture {
-        width: 500px;
+        width: 100%;
+        max-width: 400px;
     }
 
     .pokemonDatasContainer {
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .pokemonStatsContainer {
-        width: 80%;
+        width: 100%;
         height: fit-content;
         margin-left: auto;
         margin-right: auto;
-        height: auto;
         display: flex;
-        font-size: 20px;
+        font-size: 18px;
         background-color: #30A7D7;
-        padding: 16px;
+        padding: 16px 28px;
         border-radius: 16px;
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-		column-gap: 16px;
-		row-gap: 16px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 8px;
+        row-gap: 28px;
+    }
+
+    .pokemonStatsTitle {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 8px;
+        font-size: 18px;
+        color: #333333;
+        text-align: justify;
+    }
+
+    .pokemonStatsValue {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 8px;
+        font-size: 18px;
+        color: #FFFFFF;
+        text-align: justify;
     }
 
     .stats > p {
         text-align: center;
     }
 
-    .statsContainer {
-        width: 500px;
-        display: grid;
-        grid-template-columns: 20% 80%;
-        margin-bottom: 16px;
-    }
 
-    .numberStats {
-        margin-bottom: 16px;
-    }
-
-    .label, .value {
-        width: 100%;
-        height: fit-content;
-    }
 
 </style>
