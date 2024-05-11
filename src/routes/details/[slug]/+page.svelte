@@ -3,22 +3,25 @@
     /** @type {import('./$types').PageData} */
     /** @type {import('./$types').PageLoad} */
     import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	import Layout from '../../../layout/Layout.svelte';
     import '../../style.css';
+    import { error, redirect } from '@sveltejs/kit';
+    import { goto } from '$app/navigation';
+    
     let pokemonData: any = null;
     
     const fetchData = async () => {
-        await fetch("https://pokeapi.co/api/v2/pokemon/" + $page.params.slug)
-            .then((response: Response) => {
-                //console.log(response.json());
-                return response.json()
-            })
-            .then((data:any) => {
-                console.log(data.sprites.front_shiny)
-                pokemonData = data;
-            })
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + $page.params.slug);
+        if(response){
+            const data = await response.json();
+            pokemonData = data;
+        }
+        if(!response.ok){
+            goto('/404');
+        }
     }
-    fetchData();
+    onMount(fetchData);
 
     const test = () => {
         console.log(pokemonData.types)
@@ -81,9 +84,6 @@
         text-transform: capitalize;
         font-size: 35px;
 
-    }
-
-    .pokemonDatasContainer {
     }
 
     .pokemonPictureContainer {
