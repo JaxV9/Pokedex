@@ -30,7 +30,7 @@
         <div class="pokemonDatasContainer">
             <div class="pokemonPictureContainer">
                 <h1>{pokemonData.name}</h1>
-                <img src={pokemonData.sprites.front_default} alt={pokemonData.name} class="pokemonPicture"/>
+                <img class="pokemonPicture" src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+pokemonData.id+".png"} alt={pokemonData.name}/>
             </div>
             <div class="pokemonStatsContainer">
                 <div class="stats">
@@ -64,9 +64,21 @@
 
 <style>
 
-    .pokemonPicture {
-        width: 300px;
+    .pokemonPictureContainer {
+        background-color: #F2F2F2;
         border-radius: 16px;
+        padding: 16px;
+    }
+
+    .pokemonPictureContainer > h1 {
+        color: black;
+        text-align: center;
+        margin-bottom: 0;
+        text-transform: capitalize;
+    }
+
+    .pokemonPicture {
+        width: 100%;
     }
 
     .pokemonDatasContainer {

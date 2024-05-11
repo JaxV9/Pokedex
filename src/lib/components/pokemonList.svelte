@@ -8,7 +8,7 @@
         {#each PokemonListProps.results as pokemon, index}
             <a class="linkPokemon" href="details/{pokemon.name}">
                 <div class="pokemonContainer" >
-                    <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+[index+1]+".png"} alt=""/>
+                    <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+[index+1]+".png"} alt=""/>
                     <h3>{pokemon.name}</h3>
 					<p class="pokemonDetails"> N°{index+1}</p>
                 </div>
@@ -43,14 +43,14 @@
 		flex-direction: column;
 		align-items: center;
 		border-radius: 10px;
-		background-color: #d3d1d1;
+		background-color: #F2F2F2;
 		transition: all ease 0.2s;
 	}
 
 	.pokemonContainer:hover {
 		scale: 1.1;
 		transition: all ease 0.2s;
-		background-color: #bababa;
+		background-color: #d3d1d1;
 	}
 
 	.pokemonContainer > img {
