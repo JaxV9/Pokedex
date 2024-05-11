@@ -1,10 +1,9 @@
 <script lang="ts">
     export let PokemonListProps;
-    export let PokemonDetailsProps;
         
 </script>
         
-    {#if PokemonListProps && PokemonDetailsProps.length > 0}
+    {#if PokemonListProps}
     <div id="pokemonContainerList">
         {#each PokemonListProps.results as pokemon, index}
             <a class="linkPokemon" href="details/{pokemon.name}">

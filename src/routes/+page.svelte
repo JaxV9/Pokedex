@@ -9,7 +9,6 @@
 	import Layout from '../layout/Layout.svelte';
   
 	let pokemonList: PokemonListType;
-	let pokemonDetails: PokemonType[]  = [];
 	let countPokemons: number = 0
 
 	let currentOffset: number = 0
@@ -30,7 +29,7 @@
 			pokemonList.results = [...pokemonList.results, ...data.results];
 			currentNbPokemon = pokemonList.results.length
 		}
-		await fetchPokemonDetails();
+		
 	}
 
 	const loadMorePokemon = async () => {
@@ -38,28 +37,13 @@
 		currentPage += 1
 		fetchPokemonList(currentOffset)
 	}
-  
-	async function fetchPokemonDetails() {
-		let theLastsPokemons = pokemonList.results.slice(- currentLimit)
-		for (const pokemon of theLastsPokemons) {
-			const response = await fetch(pokemon.url);
-			const details = await response.json();
-			const sprites = details.sprites.front_default;
-			pokemonDetails = [...pokemonDetails, sprites];
-		}
-	}
+
   
 	onMount(async () => {
 		fetchPokemonList(currentOffset)
 	});
 	let pokemonName = '';
 
-     function handleSubmit(event: any) {
-      event.preventDefault();
-      if (pokemonName.trim() !== '') {
-        window.location.href = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
-      }
-	  }
 
 	  const test = () => {
 		console.log(pokemonList.results.length)
@@ -83,12 +67,12 @@
 		<h1>
 			Pokemons list
 		</h1>
-		<p class="informations">{currentNbPokemon} pokémons sur {countPokemons}</p>
-		<PokemonList PokemonListProps={pokemonList} PokemonDetailsProps={pokemonDetails}/>
-		<p class="informations">{currentNbPokemon} pokémons sur {countPokemons}</p>
+		<p class="informations">{currentNbPokemon} pokémons out of {countPokemons}</p>
+		<PokemonList PokemonListProps={pokemonList}/>
+		<p class="informations">{currentNbPokemon} pokémons out of {countPokemons}</p>
 		<p class="informations">Page {currentPage}</p>
-		{#if pokemonList && pokemonDetails.length > 0}
-			<Button textProps="Charger plus de pokémons" fonctionProps={loadMorePokemon}/>
+		{#if pokemonList}
+			<Button textProps="Load more" fonctionProps={loadMorePokemon}/>
 		{/if}
 
 	</section> 
