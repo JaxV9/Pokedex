@@ -16,9 +16,8 @@
         if(response){
             const data = await response.json();
             pokemonData = data;
-        }
-        if(!response.ok){
-            goto('/404');
+        }else{
+            goto('/404')
         }
     }
     onMount(fetchData);

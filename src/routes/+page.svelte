@@ -29,7 +29,6 @@
 			pokemonList.results = [...pokemonList.results, ...data.results];
 			currentNbPokemon = pokemonList.results.length
 		}
-		
 	}
 
 	const loadMorePokemon = async () => {
