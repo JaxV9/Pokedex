@@ -5,12 +5,13 @@ import Pokédex_logo from '$lib/images/Pokédex_logo.png';
   
   <div class="layout">
     <div class="logoLayoutContainer">
-        <div>
-            <a href="/">
-                <img class="logoLayout" src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png" alt="" />
-            </a>
-        </div>
+
         <div class="navLinkContainer">
+            <div>
+                <a href="/">
+                    <img class="logoLayout" src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png" alt="" />
+                </a>
+            </div>
             <a class="navLink" href="/search">
                 <div>
                         Search
@@ -38,8 +39,8 @@ import Pokédex_logo from '$lib/images/Pokédex_logo.png';
 
 .navLinkContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill);
-	column-gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	column-gap: 0px;
     width: 70%;
     margin-top: 28px;
 }
@@ -48,6 +49,8 @@ import Pokédex_logo from '$lib/images/Pokédex_logo.png';
     border: 1px #FFFFFF solid;
     text-align: center;
     width: fit-content;
+    height: fit-content;
+    margin: auto;
 }
 
 .navLink {
